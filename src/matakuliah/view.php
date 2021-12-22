@@ -69,7 +69,7 @@
 			<?php while ($row = oci_fetch_assoc($q)) {
 				echo '<tr>';
 				echo "<td>
-					<a href=\"http://localhost:8080/nilai/view.php?idmatkul={$row['ID_MATAKULIAH']}\">
+					<a href=\"http://localhost:8080/nilai/view.php?idmatkul={$row['ID_MATAKULIAH']}&idmhs={$idMhs}\">
 						{$row['NAMA']}
 					</a>
 				</td>";

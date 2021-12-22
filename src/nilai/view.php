@@ -1,7 +1,9 @@
 <?php
 	require_once __DIR__ . "/../connect.inc";
+	require_once __DIR__ . "/../constant.inc";
 
 	$idMatkul = $_GET['idmatkul'];
+	$idMhs = $_GET['idmhs'];
 
 	$q = oci_parse($conn, "SELECT id_nilai, tugas, nilai FROM
 	nilai WHERE id_matakuliah = :id");
@@ -52,6 +54,7 @@
 	}
 </style>
 <body>
+	<a href="<?= "{$env['server']}/matakuliah/view.php?idmhs={$idMhs}"?>"></a>
 	<table class="table">
 		<thead>
 			<tr>
