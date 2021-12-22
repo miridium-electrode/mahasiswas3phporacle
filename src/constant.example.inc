@@ -1,5 +1,8 @@
 <?php 
 	global $env;
 	$env = [
-		'server' => ''
+		'server' => '',
+		'dbusername' => '',
+		'dbpassword' => '',
+		'dbconnstring' => ''
 	];
