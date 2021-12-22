@@ -52,7 +52,7 @@
 	}
 </style>
 <body>
-	<a href="http://localhost:8080/mhs/view.php" class="btn btn-primary">
+	<a href="<?= "{$env['server']}"?>/mhs/view.php" class="btn btn-primary">
 		<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-chevron-left" viewBox="0 0 16 16">
 			<path fill-rule="evenodd" d="M11.354 1.646a.5.5 0 0 1 0 .708L5.707 8l5.647 5.646a.5.5 0 0 1-.708.708l-6-6a.5.5 0 0 1 0-.708l6-6a.5.5 0 0 1 .708 0z"/>
 		</svg>
@@ -69,7 +69,7 @@
 			<?php while ($row = oci_fetch_assoc($q)) {
 				echo '<tr>';
 				echo "<td>
-					<a href=\"http://localhost:8080/nilai/view.php?idmatkul={$row['ID_MATAKULIAH']}&idmhs={$idMhs}\">
+					<a href=\"{$env['server']}/nilai/view.php?idmatkul={$row['ID_MATAKULIAH']}&idmhs={$idMhs}\">
 						{$row['NAMA']}
 					</a>
 				</td>";
