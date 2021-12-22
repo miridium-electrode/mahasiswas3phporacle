@@ -1,4 +1,5 @@
 <?php
+// menciptakan random string untuk id mahasiswa, id nilai, id id matakulias
 function random_str(
     int $length = 64,
     string $keyspace = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ'
