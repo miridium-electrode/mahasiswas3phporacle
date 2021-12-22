@@ -1,6 +1,7 @@
 <?
 	require_once __DIR__ . '/../connect.inc';
 	require_once __DIR__ . '/../random_str.inc';
+	require_once __DIR__ . '/../constant.inc';
 
 	$id = random_str();
 	$nama = $_POST['nama'];
@@ -29,5 +30,5 @@
 	oci_free_statement($q);
 	oci_close($conn);
 
-	header('Location: http://localhost:8080/mhs/view.php', true, 302);
+	header("Location: {$env['server']}/mhs/view.php", true, 302);
 	exit();
