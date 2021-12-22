@@ -1,10 +1,10 @@
 <?php 
 	require_once __DIR__ . "/../connect.inc";
 
-	$idMhs = $_GET['idmhs'];
 	$idMatkul = $_GET['idmatkul'];
+	$idNilai = $_GET['idn'];
 
-	$q = oci_parse($conn, "SELECT nama FROM matakuliah WHERE id_matakuliah = :id");
+	$q = oci_parse($conn, "SELECT tugas, nilai FROM nilai WHERE id_nilai = :id");
 	if (!$q) {
 		$e = oci_error($conn);
 		trigger_error(htmlentities($e['message'], ENT_QUOTES), E_USER_ERROR);
@@ -47,15 +47,19 @@
 <body>
 	<div class="centering">
 		<form action="update.php" method="post" class="container">
-			<h2 class="mb-3">Update Matakuliah</h2>
+			<h2 class="mb-3">Update Nilai</h2>
 			<div class="row mb-3">
-				<label for="nama" class="col form-label me-3">Nama Matakuliah</label>
-				<input type="text" name="nama" class="col form-control" value="<?= $row['NAMA']?>"/>
+				<label for="tugas" class="col form-label me-3">Nama Tugas</label>
+				<input type="text" name="tugas" class="col form-control" value="<?= $row['TUGAS']?>"/>
 			</div>
-			<input type="hidden" name="idmhs" value="<?= $idMhs?>"/>
+			<div class="row mb-3">
+				<label for="nilai" class="col form-label me-3">Nilai</label>
+				<input type="text" name="nilai" class="col form-control" value="<?= $row['NILAI']?>"/>
+			</div>
+			<input type="hidden" name="idn" value="<?= $idNilai?>"/>
 			<input type="hidden" name="idmatkul" value="<?= $idMatkul?>">
 			<div class="row">
-				<button type="submit" class="btn btn-primary col me-3">Update Mata Kuliah</button>
+				<button type="submit" class="btn btn-primary col me-3">Update Nilai</button>
 				<button type="reset" class="btn btn-danger col">Reset</button>
 			</div>
 		</form>
