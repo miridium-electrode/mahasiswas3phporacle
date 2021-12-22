@@ -1,5 +1,7 @@
 <?php 
 	require_once __DIR__ . "/../constant.inc";
+	// url query parameter untuk kembali ke halaman /nilai/view
+	// dan juga input id_matakuliah
 	$idMatkul = $_GET['idmatkul'];
 	$idMhs = $_GET['idmhs'];
 ?>

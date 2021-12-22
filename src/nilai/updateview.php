@@ -1,24 +1,37 @@
 <?php 
+	// import $conn
 	require_once __DIR__ . "/../connect.inc";
 
+	/**
+	 * mendapatkan query parameter 
+	 * /nilai/updateview.php?idmhs=...&idmatkul=...&idn=...
+	 * idn sebagai id_nilai untuk where
+	 * idmatkul sebagai value yang diperlukan halaman view.php untuk filter nilai utk matkul tertentu
+	 * idmhs sebahai value supaya dari /nilai/view.php bisa kembali ke /matakuliah/view.php 
+	 */
 	$idMatkul = $_GET['idmatkul'];
 	$idNilai = $_GET['idn'];
 	$idMhs = $_GET['idmhs'];
 
+	// mendapatkan nilai sebelum di update
 	$q = oci_parse($conn, "SELECT tugas, nilai FROM nilai WHERE id_nilai = :id");
+	// error handling
 	if (!$q) {
 		$e = oci_error($conn);
 		trigger_error(htmlentities($e['message'], ENT_QUOTES), E_USER_ERROR);
 	}
 
+	// bind parameter
 	oci_bind_by_name($q, ":id", $idNilai);
 
+	// execute query
 	$r = oci_execute($q);
 	if (!$r) {
 		$e = oci_error($q);
 		trigger_error(htmlentities($e['message'], ENT_QUOTES), E_USER_ERROR);
 	}
 
+	// medapatkan row pertama
 	$row = oci_fetch_assoc($q);
 ?>
 
@@ -48,6 +61,7 @@
 <body>
 	<div class="centering">
 		<form action="update.php" method="post" class="container">
+			<!-- link kembali ke /nilai/view.php/.... -->
 			<a href="<?= "{$env['server']}/nilai/view.php?idmatkul={$idMatkul}&idmhs={$idMhs}" ?>">
 				<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-chevron-left" viewBox="0 0 16 16">
 					<path fill-rule="evenodd" d="M11.354 1.646a.5.5 0 0 1 0 .708L5.707 8l5.647 5.646a.5.5 0 0 1-.708.708l-6-6a.5.5 0 0 1 0-.708l6-6a.5.5 0 0 1 .708 0z"/>
