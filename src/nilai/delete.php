@@ -1,5 +1,6 @@
 <?php 
 	require_once __DIR__ . '/../connect.inc';
+	require_once __DIR__ . '/../constant.inc';
 
 	$idMatkul = $_GET['idmatkul'];
 	$idNilai = $_GET['idn'];
@@ -21,5 +22,5 @@
 	oci_free_statement($q);
 	oci_close($conn);
 
-	header("Location: http://localhost:8080/nilai/view.php?idmatkul={$idMatkul}", true, 303);
+	header("Location: {$env['server']}/nilai/view.php?idmatkul={$idMatkul}", true, 303);
 	exit();
