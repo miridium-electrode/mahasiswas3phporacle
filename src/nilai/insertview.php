@@ -34,8 +34,8 @@
 				<input type="text" name="tugas" class="col form-control" />
 			</div>
 			<div class="row mb-3">
-				<label for="tugas" class="col form-label me-3">Nilai</label>
-				<input type="text" name="tugas" class="col form-control" />
+				<label for="nilai" class="col form-label me-3">Nilai</label>
+				<input type="text" name="nilai" class="col form-control" />
 			</div>
 			<input type="hidden" name="idmatkul" value="<?= $idMatkul?>"/>
 			<div class="row">
