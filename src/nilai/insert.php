@@ -9,8 +9,9 @@
 	$idMatkul = $_POST['idmatkul'];
 	$tugas = $_POST['tugas'];
 	$nilai = $_POST['nilai'];
+	$idMhs = $_POST['idmhs'];
 
-	// inser query
+	// insert query
 	$q = oci_parse($conn, "INSERT INTO nilai(id_nilai, id_matakuliah, tugas, nilai)
 	VALUES (:idnilai, :idmatkul, :tugas, :nilai)");
 	// error handling
@@ -37,5 +38,5 @@
 	oci_close($conn);
 
 	// redirect ke /nilai/view.php
-	header("Location: {$env['server']}/nilai/view.php?idmatkul={$idMatkul}", true, 302);
+	header("Location: {$env['server']}/nilai/view.php?idmatkul={$idMatkul}&idmhs={$idMhs}", true, 302);
 	exit();

@@ -48,6 +48,7 @@
 				<input type="text" name="nilai" class="col form-control" />
 			</div>
 			<input type="hidden" name="idmatkul" value="<?= $idMatkul?>"/>
+			<input type="hidden" name="idmhs" value="<?= $idMhs?>"/>
 			<div class="row">
 				<button type="submit" class="btn btn-primary col me-3">Insert Nilai</button>
 				<button type="reset" class="btn btn-danger col">Reset</button>

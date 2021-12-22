@@ -6,6 +6,7 @@
 	// idn untuk id_nilai
 	$idMatkul = $_GET['idmatkul'];
 	$idNilai = $_GET['idn'];
+	$idMhs = $_GET['idmhs'];
 
 	// delete dengan filter id_nilai
 	$q = oci_parse($conn, "DELETE FROM nilai WHERE id_nilai = :id");
@@ -30,5 +31,5 @@
 	oci_close($conn);
 
 	// redirect ke /nilai/view.php
-	header("Location: {$env['server']}/nilai/view.php?idmatkul={$idMatkul}", true, 303);
+	header("Location: {$env['server']}/nilai/view.php?idmatkul={$idMatkul}&idmhs={$idMhs}", true, 303);
 	exit();

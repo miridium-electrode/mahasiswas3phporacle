@@ -9,6 +9,7 @@
 	$idMatkul = $_POST['idmatkul'];
 	$tugas = $_POST['tugas'];
 	$nilai = $_POST['nilai'];
+	$idMhs = $_POST['idmhs'];
 
 	// query untuk update, filter berdasarkan id_nilai
 	$q = oci_parse($conn, "UPDATE nilai SET tugas=:tugas, nilai=:nilai, 
@@ -37,5 +38,5 @@
 	oci_close($conn);
 
 	// redirect ke /nilai/view.php
-	header("Location: {$env['server']}/nilai/view.php?idmatkul={$idMatkul}", true, 303);
+	header("Location: {$env['server']}/nilai/view.php?idmatkul={$idMatkul}&idmhs={$idMhs}", true, 303);
 	exit();

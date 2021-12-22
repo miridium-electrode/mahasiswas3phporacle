@@ -6,7 +6,7 @@
 	 * mendapatkan query parameter 
 	 * /nilai/updateview.php?idmhs=...&idmatkul=...&idn=...
 	 * idn sebagai id_nilai untuk where
-	 * idmatkul sebagai value yang diperlukan halaman view.php untuk filter nilai utk matkul tertentu
+	 * idmatkul sebagai value yang diperlukan halaman view.php untuk filter nilai matkul tertentu
 	 * idmhs sebahai value supaya dari /nilai/view.php bisa kembali ke /matakuliah/view.php 
 	 */
 	$idMatkul = $_GET['idmatkul'];
@@ -79,6 +79,7 @@
 			</div>
 			<input type="hidden" name="idn" value="<?= $idNilai?>"/>
 			<input type="hidden" name="idmatkul" value="<?= $idMatkul?>">
+			<input type="hidden" name="idmhs" value="<?= $idMhs?>">
 			<div class="row">
 				<button type="submit" class="btn btn-primary col me-3">Update Nilai</button>
 				<button type="reset" class="btn btn-danger col">Reset</button>
