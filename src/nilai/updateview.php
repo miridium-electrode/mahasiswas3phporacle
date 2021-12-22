@@ -3,6 +3,7 @@
 
 	$idMatkul = $_GET['idmatkul'];
 	$idNilai = $_GET['idn'];
+	$idMhs = $_GET['idmhs'];
 
 	$q = oci_parse($conn, "SELECT tugas, nilai FROM nilai WHERE id_nilai = :id");
 	if (!$q) {
@@ -47,6 +48,12 @@
 <body>
 	<div class="centering">
 		<form action="update.php" method="post" class="container">
+			<a href="<?= "{$env['server']}/nilai/view.php?idmatkul={$idMatkul}&idmhs={$idMhs}" ?>">
+				<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-chevron-left" viewBox="0 0 16 16">
+					<path fill-rule="evenodd" d="M11.354 1.646a.5.5 0 0 1 0 .708L5.707 8l5.647 5.646a.5.5 0 0 1-.708.708l-6-6a.5.5 0 0 1 0-.708l6-6a.5.5 0 0 1 .708 0z"/>
+				</svg>
+				 Back to Nilai
+			</a>
 			<h2 class="mb-3">Update Nilai</h2>
 			<div class="row mb-3">
 				<label for="tugas" class="col form-label me-3">Nama Tugas</label>
