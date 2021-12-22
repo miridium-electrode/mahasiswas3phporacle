@@ -1,20 +1,30 @@
 <?php
+	// import $conn dan $env
 	require_once __DIR__ . "/../connect.inc";
 	require_once __DIR__ . "/../constant.inc";
 
+	/**
+	 *  mendapatkan query parameter idmatkul dan idmhs
+	 *  supaya bisa kembali ke halaman /matakuliah/view.php?idmhs=...
+	 */
 	$idMatkul = $_GET['idmatkul'];
 	$idMhs = $_GET['idmhs'];
 
+	// oci_parse untuk melakukan select
 	$q = oci_parse($conn, "SELECT id_nilai, tugas, nilai FROM
 	nilai WHERE id_matakuliah = :id");
+	// error handling
 	if (!$q) {
 		$e = oci_error($conn);
 		trigger_error(htmlentities($e['message'], ENT_QUOTES), E_USER_ERROR);
 	}
 
+	// parameter bind
 	oci_bind_by_name($q, ":id", $idMatkul);
 
+	// execute query
 	$r = oci_execute($q);
+	// error handling
 	if (!$r) {
 		$e = oci_error($q);
 		trigger_error(htmlentities($e['message'], ENT_QUOTES), E_USER_ERROR);
@@ -28,6 +38,7 @@
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<title>Nilai</title>
+	<!-- import bootstrap -->
 	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
 	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
 </head>
@@ -54,12 +65,14 @@
 	}
 </style>
 <body>
+	<!-- link yang bisa di klik untuk kembali ke /matakuliah/view.php?idmhs=... -->
 	<a href="<?= "{$env['server']}/matakuliah/view.php?idmhs={$idMhs}"?>" class="btn btn-primary">
 		<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-chevron-left" viewBox="0 0 16 16">
 			<path fill-rule="evenodd" d="M11.354 1.646a.5.5 0 0 1 0 .708L5.707 8l5.647 5.646a.5.5 0 0 1-.708.708l-6-6a.5.5 0 0 1 0-.708l6-6a.5.5 0 0 1 .708 0z"/>
 		</svg>
 		 Back to Matakuliah
 	</a>
+	<!-- tabel view -->
 	<table class="table">
 		<thead>
 			<tr>
@@ -71,8 +84,11 @@
 		<tbody>
 			<?php while($row = oci_fetch_assoc($q)) {
 				echo '<tr>';
+				// tampilkan tugas
 				echo "<td>{$row['TUGAS']}</td>";
+				// tampilkan nilai
 				echo "<td>{$row['NILAI']}</td>";
+				// icon update dan delete
 				echo "<td>
 					<a href=\"{$env['server']}/nilai/updateview.php?idmatkul={$idMatkul}&idn={$row['ID_NILAI']}&idmhs={$idMhs}\">
 						<svg xmlns=\"http://www.w3.org/2000/svg\" width=\"16\" height=\"16\" fill=\"currentColor\" class=\"bi bi-pencil-square\" viewBox=\"0 0 16 16\">
@@ -91,6 +107,7 @@
 			}?>
 		</tbody>
 	</table>
+	<!-- link create nilai -->
 	<a href="<?= "{$env['server']}"?>/nilai/insertview.php?idmatkul=<?= $idMatkul?>&idmhs=<?= $idMhs?>" class="btn btn-primary">
 		<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-plus create-btn" viewBox="0 0 16 16">
 			<path d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4z"/>
@@ -101,6 +118,7 @@
 </html>
 
 <?php
+	// bebaskan resource yang dipake untuk select dan close connection 
 	oci_free_statement($q);
 	oci_close($conn);
 ?>
