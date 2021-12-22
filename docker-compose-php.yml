@@ -1,0 +1,12 @@
+version: '3'
+
+services:
+  php7-with-oci8:
+    image: adrianharabula/php7-with-oci8:7.1.16-apache-jessie-oci-2.1.8-instantclient-12.2.0.1.0
+    volumes:
+      - ./src:/var/www/html
+    ports:
+      - 8080:80
+
+volumes:
+  src:
